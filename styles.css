@@ -1,0 +1,35 @@
+#bookDisplay {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 100px auto;
+    width: 90%;
+    height: 400px;
+    background-color: rgb(0, 0, 0);
+}
+
+.displayedBook {
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    background-color: rgb(192, 232, 255);
+}
+
+#addBook {
+    display: relative;
+    width: 200px;
+    margin-left: 46%;
+    margin-top: 40px;
+}
+
+.inputTable {
+    display: none;
+}
+
+.inputTableActive {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 400px;
+    margin: 0 auto;
+}
