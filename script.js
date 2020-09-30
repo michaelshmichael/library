@@ -1,4 +1,5 @@
 let myLibrary = [];
+let deleteButtons = [];
 const bookDisplay = document.getElementById("bookDisplay");
 const addBook = document.getElementById("addBook");
 const inputTable = document.querySelector(".inputTable");
@@ -13,55 +14,89 @@ function Book(title, author, pages, read) {
   this.read = read;
 };
 
-// showing books
+// creating book cards and applying values to them
 function displayAllBooks(){
 
+  // creating book cards
   for(i = myLibrary.length - 1; i < myLibrary.length; i++){
     const book = document.createElement('div');
     book.classList.add('displayedBook')
+    book.setAttribute("data-index", i);
     bookDisplay.appendChild(book);
-      for(j = 0; j < 4; j++){
-        const detail = document.createElement('div');
-        detail.classList.add('displayedDetails');
-        detail.setAttribute("id", "detail_" + i + j);
-        book.appendChild(detail);
-      }
+
+            // creating the individual elements on the cards
+            for(j = 0; j < 4; j++){
+              const detail = document.createElement('div');
+              detail.classList.add('displayedDetails');
+              detail.setAttribute("id", "detail_" + i + j);
+              book.appendChild(detail);
+            }
+
+    // creating the text values and whether read or not for the books
     document.getElementById("detail_" + i + "0").textContent = "Title: " + myLibrary[i].title; 
     document.getElementById("detail_" + i + "1").textContent = "Author: " + myLibrary[i].author;
     document.getElementById("detail_" + i + "2").textContent = "No. of Pages: " + myLibrary[i].pages;
-    if(myLibrary[i].read === false){
-      document.getElementById("detail_" + i + "3").textContent = "Unread";   
-    } else {
-      document.getElementById("detail_" + i + "3").textContent = "Read";
-    }
+      if(myLibrary[i].read === false){
+        document.getElementById("detail_" + i + "3").textContent = "Unread";  
+      } else {
+        document.getElementById("detail_" + i + "3").textContent = "Read";
+      }
+
+    // creating the delete button and setting its values
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("deleteButton");
     deleteButton.setAttribute("id", "delete" + i)
+    deleteButton.setAttribute("data-index", i);
     deleteButton.textContent = "Delete Book"
     book.appendChild(deleteButton);
+    deleteButton.addEventListener("click", function(e){
+      removeBook(e)
+    })
+    
+    const toggleReadButton = document.createElement("button");
+    toggleReadButton.classList.add("toggleRead");
+    toggleReadButton.setAttribute("data-index", i);
+    toggleReadButton.textContent = "Read?";
+    book.appendChild(toggleReadButton);
+    toggleReadButton.addEventListener("click", function(e){
+      toggleRead(e);
+    })
+  }
+};
+
+// removing book from library
+function removeBook(e) {
+  const index = e.target.dataset.index;
+  console.log(index);
+  myLibrary.splice(index, 1);
+  bookDisplay.removeChild(bookDisplay.childNodes[index]);
+  console.log(myLibrary)
+  for (let i = 0; i < bookDisplay.childElementCount; i++) {
+    bookDisplay.childNodes[i].childNodes[4].setAttribute("data-index", i);
+    bookDisplay.childNodes[i].childNodes[3].setAttribute("data-index", i); 
   }
 }
 
+// THIS NEEDS WORK HERE
+function toggleRead(e) {
+  const index = e.target.dataset.index;
+  console.log(index)
+  if(myLibrary[index].read === true){
+    myLibrary[index].read = false;
+    displayAllBooks();
+  } else {
+    console.log("eer")
+  }
+};
 
+// adding a book to the library 
 addBook.addEventListener("click", function(){
   inputTable.reset();
   inputTable.classList.toggle("inputTableActive");
 });
 
-let deleteButtons = document.getElementsByClassName("deleteButton");
-let deleteButtonsArray = Array.from(deleteButtons);
-
-// deleteButton.forEach(function(e){
-//   e.addEventListener("click", function(){
-
-//   })
-// })
-
-
-// adds a book to the library
-
-function addBookToLibrary(ev){
-  ev.preventDefault();
+function addBookToLibrary(e){
+  e.preventDefault();
   let newBook = new Book(document.getElementById("title").value,
                          document.getElementById("author").value, 
                          parseInt(document.getElementById("pages").value), 
@@ -70,6 +105,8 @@ function addBookToLibrary(ev){
   console.log(myLibrary);
   inputTable.classList.toggle("inputTableActive")
   displayAllBooks();
-}
+};
 
 submitButton.addEventListener("click", addBookToLibrary);
+
+
