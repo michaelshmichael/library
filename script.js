@@ -20,7 +20,7 @@ function displayAllBooks(){
   // creating book cards
   for(i = myLibrary.length - 1; i < myLibrary.length; i++){
     const book = document.createElement('div');
-    book.classList.add('displayedBook')
+    //book.classList.add('displayedBook')
     book.setAttribute("data-index", i);
     bookDisplay.appendChild(book);
 
@@ -37,9 +37,11 @@ function displayAllBooks(){
     document.getElementById("detail_" + i + "1").textContent = "Author: " + myLibrary[i].author;
     document.getElementById("detail_" + i + "2").textContent = "No. of Pages: " + myLibrary[i].pages;
       if(myLibrary[i].read === false){
-        document.getElementById("detail_" + i + "3").textContent = "Unread";  
+        document.getElementById("detail_" + i + "3").textContent = "Unread";
+        book.classList.add('unreadBook')  
       } else {
         document.getElementById("detail_" + i + "3").textContent = "Read";
+        book.classList.add('readBook');
       }
 
     // creating the delete button and setting its values
@@ -61,6 +63,7 @@ function displayAllBooks(){
     toggleReadButton.addEventListener("click", function(e){
       toggleRead(e);
     })
+    
   }
 };
 
@@ -77,15 +80,34 @@ function removeBook(e) {
   }
 }
 
-// THIS NEEDS WORK HERE
+var currentBooks = document.querySelectorAll(".unreadBook.readBook");
+var currentBooksArray = Array.from(currentBooks);
+
+// this toggles whether the book has been read or not
 function toggleRead(e) {
   const index = e.target.dataset.index;
-  console.log(index)
+  
+  console.log(currentBooksArray)
+
+  // if the book is read
   if(myLibrary[index].read === true){
     myLibrary[index].read = false;
-    displayAllBooks();
+    document.getElementById("detail_" + index + "3").textContent = "Unread";
+    currentBooksArray.forEach(function(book){
+      if (book.dataset.index === index){
+        book.classList.toggle('unreadBook')
+      };
+    })
+
+  // if the book is unread
   } else {
-    console.log("eer")
+    myLibrary[index].read = true;
+    document.getElementById("detail_" + index + "3").textContent = "Read";
+    currentBooksArray.forEach(function(book){
+      if (book.dataset.index === index){
+        book.classList.toggle('readBook')
+      };
+    })
   }
 };
 
