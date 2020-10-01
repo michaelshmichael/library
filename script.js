@@ -1,5 +1,4 @@
 let myLibrary = [];
-let deleteButtons = [];
 const bookDisplay = document.getElementById("bookDisplay");
 const addBook = document.getElementById("addBook");
 const inputTable = document.querySelector(".inputTable");
@@ -80,38 +79,39 @@ function removeBook(e) {
   }
 }
 
-var currentBooks = document.querySelectorAll(".unreadBook.readBook");
-var currentBooksArray = Array.from(currentBooks);
-
 // this toggles whether the book has been read or not
 function toggleRead(e) {
   const index = e.target.dataset.index;
-  
-  console.log(currentBooksArray)
-
+  let currentBooks = document.querySelectorAll("div.unreadBook, div.readBook");
+  let currentBooksArray = Array.from(currentBooks);
   // if the book is read
   if(myLibrary[index].read === true){
     myLibrary[index].read = false;
     document.getElementById("detail_" + index + "3").textContent = "Unread";
     currentBooksArray.forEach(function(book){
       if (book.dataset.index === index){
-        book.classList.toggle('unreadBook')
+        book.classList.remove('readBook')
+        book.classList.add('unreadBook')
       };
     })
-
   // if the book is unread
   } else {
     myLibrary[index].read = true;
     document.getElementById("detail_" + index + "3").textContent = "Read";
     currentBooksArray.forEach(function(book){
       if (book.dataset.index === index){
-        book.classList.toggle('readBook')
+        book.classList.remove('unreadBook')
+        book.classList.add('readBook')
       };
     })
   }
+  for (let i = 0; i < bookDisplay.childElementCount; i++) {
+    bookDisplay.childNodes[i].childNodes[4].setAttribute("data-index", i);
+    bookDisplay.childNodes[i].childNodes[3].setAttribute("data-index", i); 
+  }
 };
 
-// adding a book to the library 
+// making the input table visible
 addBook.addEventListener("click", function(){
   inputTable.reset();
   inputTable.classList.toggle("inputTableActive");
