@@ -30,7 +30,7 @@ body {
     width: 200px;
     height: 90%;
     margin: 20px 15px;
-    background-color: #f78a93;
+    background-color: #ff808a;
     font-family: 'Peddana', serif;
 }
 
@@ -54,6 +54,7 @@ body {
     width: 100%;
     height: 22%;
     vertical-align: middle;
+    outline: none;
 }
 
 .deleteButton {
@@ -68,28 +69,32 @@ body {
 .deleteButton:hover {
     width: 100%;
     height: 40px;
-    background-color: #ff4242;
+    background-color: #f75656;
     outline: none;
     border: none;
     font-size: 1.6em;
 }
 
 .toggleRead {
+    padding-top: 3px;
     width: 100%;
     height: 40px;
     background-color: #91eae4;
     outline: none;
     border: none;
-    font-size: 1.6em;
+    font-size: 1.5em;
+    
 }
 
 .toggleRead:hover {
+    padding-top: 3px;
     width: 100%;
     height: 40px;
     background-color: #fab863;
     outline: none;
     border: none;
-    font-size: 1.6em;
+    font-size: 1.5em;
+    
 }
 
 .inputTable {

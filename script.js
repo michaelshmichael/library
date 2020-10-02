@@ -3,6 +3,7 @@ const bookDisplay = document.getElementById("bookDisplay");
 const addBook = document.getElementById("addBook");
 const inputTable = document.querySelector(".inputTable");
 const submitButton = document.getElementById("submitButton");
+let data = JSON.parse(localStorage.getItem('items'))
 
 
 // book constructor
@@ -124,6 +125,13 @@ function addBookToLibrary(e){
                          parseInt(document.getElementById("pages").value), 
                          document.getElementById("read").checked);
   myLibrary.push(newBook);
+
+
+
+  localStorage.setItem('items', JSON.stringify(myLibrary))
+
+
+
   console.log(myLibrary);
   inputTable.classList.toggle("inputTableActive")
   displayAllBooks();
@@ -131,4 +139,14 @@ function addBookToLibrary(e){
 
 submitButton.addEventListener("click", addBookToLibrary);
 
+
+// storage
+
+function populateStorage() {
+  localStorage.setItem('bgcolor', document.getElementById('bgcolor').value);
+  localStorage.setItem('font', document.getElementById('font').value);
+  localStorage.setItem('image', document.getElementById('image').value);
+
+  setStyles();
+}
 
