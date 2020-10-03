@@ -46,7 +46,7 @@ body {
     height: auto;
     font-family: 'Peddana', serif;
     font-size: 2em;
-    background-color: #f88eba;
+    background-color:#ff808a;
     outline: none;
     margin-right: 150px;
 }
@@ -95,7 +95,7 @@ body {
         margin: 10px auto;
         font-family: 'Peddana', serif;
         font-size: 2em;
-        background-color: #f88eba;
+        background-color:#ff808a;
         outline: none;
     }
 }
@@ -141,7 +141,7 @@ body {
     width: 200px;
     height: 300px;
     margin: 20px 15px;
-    background-color: #cafd8f;
+    background-color: #71fcab;
     font-family: 'Peddana', serif;
 }
 
@@ -152,7 +152,7 @@ body {
     width: 200px;
     height: 300px;
     margin: 20px 15px;
-    background-color: #cafd8f;
+    background-color: #71fcab;
     font-family: 'Peddana', serif;
     transform: scale(1.1);
     transition: 250ms ease-in-out;
