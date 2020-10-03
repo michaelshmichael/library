@@ -17,6 +17,7 @@ body {
     margin-right: 20px;
     font-family: 'Peddana', serif;
     font-size: 50px;
+    font-weight: 600;
     text-align: center;
     vertical-align: middle;
     outline: none;
@@ -31,7 +32,7 @@ body {
 
 #addBook {
     display: block;
-    width: 300px;
+    width: 250px;
     height: auto;
     margin-right: 20px;
     font-family: 'Peddana', serif;
@@ -41,7 +42,7 @@ body {
 }
 
 #clearBooks {
-    width: 300px;
+    width: 250px;
     height: auto;
     font-family: 'Peddana', serif;
     font-size: 2em;
@@ -78,9 +79,9 @@ body {
     }
 
     #addBook {
-        width: 300px;
+        width: 250px;
         height: auto;
-        margin: 0 auto;
+        margin: 20px auto 0 auto;
         font-family: 'Peddana', serif;
         font-size: 2em;
         background-color: #7f7fd5;
@@ -89,7 +90,7 @@ body {
     }
     
     #clearBooks {
-        width: 300px;
+        width: 250px;
         height: auto;
         margin: 10px auto;
         font-family: 'Peddana', serif;
@@ -207,8 +208,8 @@ body {
     font-family: 'Peddana', serif;
     font-size: 1.6em;
     text-align: center;
-    background-color: greenyellow;
-    border: 10px solid paleturquoise;
+    background-color: rgb(187, 250, 93);
+    border: 10px solid rgb(199, 253, 253);
     padding: 14px;
 }
 
