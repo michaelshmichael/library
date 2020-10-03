@@ -122,6 +122,19 @@ body {
     font-family: 'Peddana', serif;
 }
 
+.unreadBook:hover{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 200px;
+    height: 300px;;
+    margin: 20px 15px;
+    background-color: #ff808a;
+    font-family: 'Peddana', serif;
+    transform: scale(1.3);
+    transition: 250ms ease-in-out;
+}
+
 .readBook{
     display: flex;
     flex-direction: column;
@@ -131,6 +144,19 @@ body {
     margin: 20px 15px;
     background-color: #cafd8f;
     font-family: 'Peddana', serif;
+}
+
+.readBook:hover{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 200px;
+    height: 300px;
+    margin: 20px 15px;
+    background-color: #cafd8f;
+    font-family: 'Peddana', serif;
+    transform: scale(1.3);
+    transition: 250ms ease-in-out;
 }
 
 .displayedDetails {
@@ -196,8 +222,10 @@ body {
     justify-content: space-evenly;
     width: 100%;
     top: 160px;
+    
 
 }
+
 .inputTableActive {
     display: flex;
     flex-direction: column;
@@ -211,6 +239,12 @@ body {
     background-color:#71fcab;
     border: 10px solid rgb(199, 253, 253);
     padding: 14px;
+    animation: fadeIn 0.4s linear 1 forwards;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.1)}
+    100% { opacity: 1; transform: scale(1)}
 }
 
 #header {
