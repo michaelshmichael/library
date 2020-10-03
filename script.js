@@ -5,12 +5,13 @@ if (localStorage.getItem('items')) {
   myLibrary = []
 }
 localStorage.setItem('items', JSON.stringify(myLibrary));
-const data = JSON.parse(localStorage.getItem('items'));
+
+let data = JSON.parse(localStorage.getItem('items'));
 const bookDisplay = document.getElementById("bookDisplay");
 const addBook = document.getElementById("addBook");
 const inputTable = document.querySelector(".inputTable");
 const submitButton = document.getElementById("submitButton");
-
+const clearButton = document.getElementById("clearBooks")
 
 // book constructor
 function Book(title, author, pages, read) {
@@ -78,6 +79,7 @@ function addBookToLibrary(e){
                          document.getElementById("read").checked);
   myLibrary.push(newBook);
   localStorage.setItem('items', JSON.stringify(myLibrary));
+  location.reload();
   inputTable.classList.toggle("inputTableActive")
 };
 
@@ -100,7 +102,8 @@ function toggleRead(e) {
   let currentBooks = document.querySelectorAll("div.unreadBook, div.readBook");
   let currentBooksArray = Array.from(currentBooks);
   // if the book is read
-  if(myLibrary[index].read === true){
+  if(data[index].read === true){
+    data[index].read = false;
     myLibrary[index].read = false;
     document.getElementById("detail_" + index + "3").textContent = "Unread";
     currentBooksArray.forEach(function(book){
@@ -111,6 +114,7 @@ function toggleRead(e) {
     })
   // if the book is unread
   } else {
+    data[index].read = true;
     myLibrary[index].read = true;
     document.getElementById("detail_" + index + "3").textContent = "Read";
     currentBooksArray.forEach(function(book){
@@ -124,6 +128,7 @@ function toggleRead(e) {
     bookDisplay.childNodes[i].childNodes[4].setAttribute("data-index", i);
     bookDisplay.childNodes[i].childNodes[3].setAttribute("data-index", i); 
   }
+  localStorage.setItem('items', JSON.stringify(myLibrary));
 };
 
 // making the input table visible
@@ -132,5 +137,10 @@ addBook.addEventListener("click", function(){
   inputTable.classList.toggle("inputTableActive");
 });
 
-
+clearButton.addEventListener("click", function(){
+  localStorage.clear();
+  myLibrary = [];
+  data = []
+  location.reload();
+})
 
