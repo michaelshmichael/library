@@ -12,6 +12,7 @@ const addBook = document.getElementById("addBook");
 const inputTable = document.querySelector(".inputTable");
 const submitButton = document.getElementById("submitButton");
 const clearButton = document.getElementById("clearBooks")
+const launchHeader = document.getElementById("header");
 
 // book constructor
 function Book(title, author, pages, read) {
@@ -24,8 +25,10 @@ function Book(title, author, pages, read) {
 for(i = 0; i < data.length; i++){
     const book = document.createElement('div');
    //book.classList.add('readBook')
+    launchHeader.classList.add('hiddenHeader')
     book.setAttribute("data-index", i);
     bookDisplay.appendChild(book);
+
 
             // creating the individual elements on the cards
             for(j = 0; j < 4; j++){
@@ -68,7 +71,6 @@ for(i = 0; i < data.length; i++){
   })
 };
 
-
 submitButton.addEventListener("click", addBookToLibrary);
 
 function addBookToLibrary(e){
@@ -89,6 +91,7 @@ function removeBook(e) {
   console.log(index);
   myLibrary.splice(index, 1);
   bookDisplay.removeChild(bookDisplay.childNodes[index]);
+  localStorage.setItem('items', JSON.stringify(myLibrary));
   console.log(myLibrary)
   for (let i = 0; i < bookDisplay.childElementCount; i++) {
     bookDisplay.childNodes[i].childNodes[4].setAttribute("data-index", i);
@@ -137,10 +140,17 @@ addBook.addEventListener("click", function(){
   inputTable.classList.toggle("inputTableActive");
 });
 
-clearButton.addEventListener("click", function(){
-  localStorage.clear();
-  myLibrary = [];
-  data = []
-  location.reload();
-})
+if(data.length != 0){
+  clearButton.addEventListener("click", function(){
+    if((confirm('Are you really sure you want to delete the library?') == true)){
+      localStorage.clear();
+      myLibrary = [];
+      data = []; 
+      location.reload();
+      
+    }
+    launchHeader.classList.add('hiddenHeader')
+  })
+  
+};
 

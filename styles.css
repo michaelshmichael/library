@@ -2,19 +2,37 @@ body {
     background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
 }
 
-#buttons {
+#topRowContainer {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     width: 100%;
     height: 60px;
-    margin: 20px auto;
+    margin: 40px 10px 20px 10px;
+}
+
+#titleContainer {
+    width: 25%;
+    height: 60px;
+    margin-right: 20px;
+    font-family: 'Peddana', serif;
+    font-size: 50px;
+    text-align: center;
+    vertical-align: middle;
+    outline: none;
+}
+
+#buttonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 75%;
 }
 
 #addBook {
     display: block;
     width: 300px;
-    height: 60px;
+    height: auto;
     margin-right: 20px;
     font-family: 'Peddana', serif;
     font-size: 2em;
@@ -23,22 +41,72 @@ body {
 }
 
 #clearBooks {
-    float: right;
     width: 300px;
-    height: 60px;
+    height: auto;
     font-family: 'Peddana', serif;
     font-size: 2em;
     background-color: #fd6ede;
     outline: none;
+    margin-right: 150px;
+}
+
+@media (max-width: 1075px) {
+    #topRowContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+        height: 200px;
+        margin: 10px 10px 20px 10px;
+    }
+
+    #titleContainer {
+        width: 100%;
+        height: 60px;
+        font-family: 'Peddana', serif;
+        font-size: 50px;
+        text-align: center;
+        vertical-align: middle;
+        outline: none;
+    }
+
+    #buttonsContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    #addBook {
+        width: 300px;
+        height: auto;
+        margin: 0 auto;
+        font-family: 'Peddana', serif;
+        font-size: 2em;
+        background-color: #7f7fd5;
+        outline: none;
+
+    }
+    
+    #clearBooks {
+        width: 300px;
+        height: auto;
+        margin: 10px auto;
+        font-family: 'Peddana', serif;
+        font-size: 2em;
+        background-color: #fd6ede;
+        outline: none;
+    }
 }
 
 #bookDisplay {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    flex-wrap: wrap;
     margin: 20px auto;
-    width: 90%;
-    height: 400px;
+    width: 84%;
+    height: 90%;
     background-color: #fffeb8;
 }
 
@@ -47,7 +115,7 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     width: 200px;
-    height: 90%;
+    height: 300px;;
     margin: 20px 15px;
     background-color: #ff808a;
     font-family: 'Peddana', serif;
@@ -58,7 +126,7 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     width: 200px;
-    height: 90%;
+    height: 300px;
     margin: 20px 15px;
     background-color: #cafd8f;
     font-family: 'Peddana', serif;
@@ -120,15 +188,39 @@ body {
     display: none;
 }
 
+#inputTableContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    top: 160px;
+
+}
 .inputTableActive {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     width: 400px;
-    margin: 0 auto;
+    left: auto;
+    right: auto;
     font-family: 'Peddana', serif;
     font-size: 1.6em;
     text-align: center;
+    background-color: greenyellow;
+    border: 10px solid paleturquoise;
+    padding: 14px;
 }
 
+#header {
+    position: relative;
+    margin-top: 200px;
+    font-family: 'Peddana', serif;
+    text-align: center;
+    height: 200px;
+    font-size: 100px
+}
 
+.hiddenHeader {
+    display: none;
+}

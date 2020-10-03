@@ -10,13 +10,25 @@
 </head>
 
 <body>
-<div id= "buttons">
+<div id= "topRowContainer">
+  <div id = "titleContainer">
+    <p>Virtual Bookshelf</p>
+  </div>
+  <div id = "buttonsContainer">
   <button id = "addBook">Add Book To Library</button>
   <button id = "clearBooks">Clear The Library</button>
+  </div>
 </div>
 
 <div id = "bookDisplay"></div>
 
+<div id = "header">
+  <p>
+    Virtual Bookshelf - Keep A Track of Your Reading with this Helpful Website.
+  </p>
+</div>
+
+<div id = "inputTableContainer">
 <form class = "inputTable">
   <label>Book Name</label>
     <input type = "text" name = "title" id = "title" autocomplete = "off">
@@ -26,8 +38,10 @@
     <input type = "number" name = "pages" id = "pages">
   <label>Read or Not?<input type = "checkbox" name = "read" id = "read"></label>
     
-  <button id = "submitButton">Submit</button>
+  <button id = "submitButton" style = "margin-bottom: 10px;">Submit</button>
+  <button id = "cancelButton">Cancel</button>
 </form>
+</div>
 <script src="script.js"></script>
 
 </body>
