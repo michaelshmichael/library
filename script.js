@@ -22,54 +22,56 @@ function Book(title, author, pages, read) {
   this.read = read;
 };
 
-for(i = 0; i < data.length; i++){
-    const book = document.createElement('div');
-   //book.classList.add('readBook')
-    launchHeader.classList.add('hiddenHeader')
-    book.setAttribute("data-index", i);
-    bookDisplay.appendChild(book);
+function renderBooks (data){
+  bookDisplay.innerHTML = '';
+    for(i = 0; i < data.length; i++){
+      const book = document.createElement('div');
+    //book.classList.add('readBook')
+      launchHeader.classList.add('hiddenHeader')
+      book.setAttribute("data-index", i);
+      bookDisplay.appendChild(book);
 
+              // creating the individual elements on the cards
+              for(j = 0; j < 4; j++){
+                const detail = document.createElement('div');
+                detail.classList.add('displayedDetails');
+                detail.setAttribute("id", "detail_" + i + j);
+                book.appendChild(detail);
+              }
 
-            // creating the individual elements on the cards
-            for(j = 0; j < 4; j++){
-              const detail = document.createElement('div');
-              detail.classList.add('displayedDetails');
-              detail.setAttribute("id", "detail_" + i + j);
-              book.appendChild(detail);
-            }
+      //creating the text values and whether read or not for the books
+      document.getElementById("detail_" + i + "0").textContent = "Title: " + data[i].title; 
+      document.getElementById("detail_" + i + "1").textContent = "Author: " + data[i].author;
+      document.getElementById("detail_" + i + "2").textContent = "No. of Pages: " + data[i].pages;
+        if(data[i].read === false){
+          document.getElementById("detail_" + i + "3").textContent = "Unread";
+          book.classList.add('unreadBook')  
+        } else {
+          document.getElementById("detail_" + i + "3").textContent = "Read";
+          book.classList.add('readBook');
+        }
 
-    //creating the text values and whether read or not for the books
-    document.getElementById("detail_" + i + "0").textContent = "Title: " + data[i].title; 
-    document.getElementById("detail_" + i + "1").textContent = "Author: " + data[i].author;
-    document.getElementById("detail_" + i + "2").textContent = "No. of Pages: " + data[i].pages;
-      if(data[i].read === false){
-        document.getElementById("detail_" + i + "3").textContent = "Unread";
-        book.classList.add('unreadBook')  
-      } else {
-        document.getElementById("detail_" + i + "3").textContent = "Read";
-        book.classList.add('readBook');
-      }
+      //creating the delete button and setting its values
+      const deleteButton = document.createElement("button");
+      deleteButton.classList.add("deleteButton");
+      deleteButton.setAttribute("id", "delete" + i)
+      deleteButton.setAttribute("data-index", i);
+      deleteButton.textContent = "Delete Book"
+      book.appendChild(deleteButton);
+      deleteButton.addEventListener("click", function(e){
+        removeBook(e)
+      })
 
-    //creating the delete button and setting its values
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("deleteButton");
-    deleteButton.setAttribute("id", "delete" + i)
-    deleteButton.setAttribute("data-index", i);
-    deleteButton.textContent = "Delete Book"
-    book.appendChild(deleteButton);
-    deleteButton.addEventListener("click", function(e){
-      removeBook(e)
+      const toggleReadButton = document.createElement("button");
+      toggleReadButton.classList.add("toggleRead");
+      toggleReadButton.setAttribute("data-index", i);
+      toggleReadButton.textContent = "Read?";
+      book.appendChild(toggleReadButton);
+      toggleReadButton.addEventListener("click", function(e){
+        toggleRead(e);
     })
-
-    const toggleReadButton = document.createElement("button");
-    toggleReadButton.classList.add("toggleRead");
-    toggleReadButton.setAttribute("data-index", i);
-    toggleReadButton.textContent = "Read?";
-    book.appendChild(toggleReadButton);
-    toggleReadButton.addEventListener("click", function(e){
-      toggleRead(e);
-  })
-};
+  };
+}
 
 submitButton.addEventListener("click", addBookToLibrary);
 
@@ -81,9 +83,11 @@ function addBookToLibrary(e){
                          document.getElementById("read").checked);
   myLibrary.push(newBook);
   localStorage.setItem('items', JSON.stringify(myLibrary));
-  location.reload();
+  data = JSON.parse(localStorage.getItem('items'));
   inputTable.classList.toggle("inputTableActive")
+  renderBooks(data)
 };
+
 
 // removing book from library
 function removeBook(e) {
@@ -143,14 +147,13 @@ addBook.addEventListener("click", function(){
 if(data.length != 0){
   clearButton.addEventListener("click", function(){
     if((confirm('Are you really sure you want to delete the library?') == true)){
-      localStorage.clear();
+      bookDisplay.innerHTML = '';
       myLibrary = [];
-      data = []; 
-      location.reload();
-      
+      data = [];
+      localStorage.clear(); 
     }
     launchHeader.classList.add('hiddenHeader')
   })
-  
 };
 
+renderBooks(data)
