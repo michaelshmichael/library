@@ -4,8 +4,8 @@ if (localStorage.getItem('items')) {
 } else {
   myLibrary = []
 }
-localStorage.setItem('items', JSON.stringify(myLibrary));
 
+localStorage.setItem('items', JSON.stringify(myLibrary));
 let data = JSON.parse(localStorage.getItem('items'));
 const bookDisplay = document.getElementById("bookDisplay");
 const addBook = document.getElementById("addBook");
@@ -14,7 +14,7 @@ const submitButton = document.getElementById("submitButton");
 const clearButton = document.getElementById("clearBooks")
 const launchHeader = document.getElementById("header");
 
-// book constructor
+// book Object constructor
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -26,8 +26,6 @@ function renderBooks (data){
   bookDisplay.innerHTML = '';
     for(i = 0; i < data.length; i++){
       const book = document.createElement('div');
-    //book.classList.add('readBook')
-      launchHeader.classList.add('hiddenHeader')
       book.setAttribute("data-index", i);
       bookDisplay.appendChild(book);
 
@@ -62,6 +60,7 @@ function renderBooks (data){
         removeBook(e)
       })
 
+      // creating the read button and setting its values
       const toggleReadButton = document.createElement("button");
       toggleReadButton.classList.add("toggleRead");
       toggleReadButton.setAttribute("data-index", i);
@@ -71,6 +70,9 @@ function renderBooks (data){
         toggleRead(e);
     })
   };
+  if(data.length > 0){
+    launchHeader.classList.add('hiddenHeader')
+  }
 }
 
 submitButton.addEventListener("click", addBookToLibrary);
@@ -92,11 +94,10 @@ function addBookToLibrary(e){
 // removing book from library
 function removeBook(e) {
   const index = e.target.dataset.index;
-  console.log(index);
   myLibrary.splice(index, 1);
   bookDisplay.removeChild(bookDisplay.childNodes[index]);
   localStorage.setItem('items', JSON.stringify(myLibrary));
-  console.log(myLibrary)
+  data = JSON.parse(localStorage.getItem('items'));
   for (let i = 0; i < bookDisplay.childElementCount; i++) {
     bookDisplay.childNodes[i].childNodes[4].setAttribute("data-index", i);
     bookDisplay.childNodes[i].childNodes[3].setAttribute("data-index", i); 
@@ -144,16 +145,20 @@ addBook.addEventListener("click", function(){
   inputTable.classList.toggle("inputTableActive");
 });
 
-if(data.length != 0){
-  clearButton.addEventListener("click", function(){
+// deleting the whole book shelf
+clearButton.addEventListener("click", function(){
+  if(data.length === 0){
+    alert('No Books to Delete');
+  } else {
     if((confirm('Are you really sure you want to delete the library?') == true)){
       bookDisplay.innerHTML = '';
       myLibrary = [];
       data = [];
-      localStorage.clear(); 
+      localStorage.clear();
+      renderBooks(data)
+      launchHeader.classList.toggle('hiddenHeader') 
     }
-    launchHeader.classList.add('hiddenHeader')
-  })
-};
+  }
+});
 
 renderBooks(data)
