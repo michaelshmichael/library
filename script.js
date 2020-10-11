@@ -13,6 +13,7 @@ const inputTable = document.querySelector(".inputTable");
 const submitButton = document.getElementById("submitButton");
 const clearButton = document.getElementById("clearBooks")
 const launchHeader = document.getElementById("header");
+const cancelButton = document.getElementById("cancelButton")
 
 // book Object constructor
 function Book(title, author, pages, read) {
@@ -89,6 +90,11 @@ function addBookToLibrary(e){
   inputTable.classList.toggle("inputTableActive")
   renderBooks(data)
 };
+
+cancelButton.addEventListener("click", function(e){
+  e.preventDefault();
+  inputTable.classList.toggle("inputTableActive");
+})
 
 
 // removing book from library
