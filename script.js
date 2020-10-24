@@ -16,27 +16,31 @@ const launchHeader = document.getElementById("header");
 const cancelButton = document.getElementById("cancelButton")
 
 // book Object constructor
-function Book(title, author, pages, read) {
+class Book{
+  constructor (title, author, pages, read){ 
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
+  }
 };
 
 function renderBooks (data){
+
   bookDisplay.innerHTML = '';
+
     for(i = 0; i < data.length; i++){
       const book = document.createElement('div');
       book.setAttribute("data-index", i);
       bookDisplay.appendChild(book);
 
-              // creating the individual elements on the cards
-              for(j = 0; j < 4; j++){
-                const detail = document.createElement('div');
-                detail.classList.add('displayedDetails');
-                detail.setAttribute("id", "detail_" + i + j);
-                book.appendChild(detail);
-              }
+        // creating the individual elements on the cards
+        for(j = 0; j < 4; j++){
+          const detail = document.createElement('div');
+          detail.classList.add('displayedDetails');
+          detail.setAttribute("id", "detail_" + i + j);
+          book.appendChild(detail);
+        }
 
       //creating the text values and whether read or not for the books
       document.getElementById("detail_" + i + "0").textContent = "Title: " + data[i].title; 
@@ -71,10 +75,11 @@ function renderBooks (data){
         toggleRead(e);
     })
   };
+
   if(data.length > 0){
     launchHeader.classList.add('hiddenHeader')
   }
-}
+};
 
 submitButton.addEventListener("click", addBookToLibrary);
 
